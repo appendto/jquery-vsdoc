@@ -55,22 +55,18 @@ namespace Vsdoc_Generator {
 
 		static String Render() {
 
-			StringBuilder sb = new StringBuilder("var jQuery = $ = function(){\n");
+			StringBuilder sb = new StringBuilder();
 			String output = String.Empty;
 			List<String> methodOutput = new List<string>();
 
-			//&#09;
-
-			foreach (XmlElement method in jQuery) {
-				//sb.Append(RenderMethod(method));
-			}
+			//&#10; = \n
+			//&#09; - tab
 
 			foreach (XmlElement method in instanceMethods) {
 				methodOutput.Add(RenderMethod(method, true));
 			}
-
 			
-			sb.Append("\n};\n");
+			sb.Append(RenderJQuery());
 			sb.Append("$.prototype = {\n");
 			sb.Append(String.Join(", ", methodOutput.ToArray()));
 			sb.Append("\n};\n");
@@ -80,11 +76,6 @@ namespace Vsdoc_Generator {
 			}
 
 			return sb.ToString();
-		}
-
-		static String RenderJQuery() {
-
-			return String.Empty;
 		}
 
 		static String RenderMethod(XmlElement method, Boolean instance) {
@@ -181,7 +172,7 @@ namespace Vsdoc_Generator {
 						name = "handler";
 					}
 					else {
-						name = "function";
+						name = "method";
 					}
 				}
 
@@ -212,6 +203,32 @@ namespace Vsdoc_Generator {
 			}
 
 			return String.Concat("\t\t/// <returns type=\"", ResolveType(returnType), "\" />\n");
+		}
+
+		static String RenderJQuery() {
+
+			XmlElement baseNode = jQuery[0] as XmlElement;
+			String arguments = BuildArguments(baseNode.SelectNodes("signature")[0], false);
+			StringBuilder sb = new StringBuilder(String.Concat("var jQuery = $ = function(", arguments, "){\n"));
+
+			// for some reason the xml documentation has the jQuery method's signatures split between three entries (for 1.4.4)
+			// combine them into one entry for processing.
+			for (int i = 1; i < jQuery.Count; i++) {
+				foreach (XmlNode signature in jQuery[i].SelectNodes("signature")) {
+					baseNode.AppendChild(signature);
+				}
+			}
+
+			String summary = RenderSummary(baseNode, "jQuery");
+			String returns = RenderReturn(baseNode);
+			String @params = RenderParams(baseNode);
+
+			sb.Append(summary);
+			sb.Append(@params);
+			sb.Append(returns);
+			sb.Append("};\n");
+
+			return sb.ToString();
 		}
 
 		static String ResolveType(String type) {
@@ -267,7 +284,7 @@ namespace Vsdoc_Generator {
 						name = "handler";
 					}
 					else{
-						name = "function";
+						name = "method";
 					}
 				}
 

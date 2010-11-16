@@ -1,23 +1,23 @@
 var jQuery = $ = function(selector, context){
-		///	<summary>
+		/// <summary>
 		/// 	Accepts a string containing a CSS selector which is then used to match a set of elements.
 		/// 	&#10;Additional Signatures:
-		///		&#10;&#09;1. $(expression, context) - This function accepts a string containing a CSS selector which is then used to match a set of elements.
-		///		&#10;&#09;2. $(html) - Create DOM elements on-the-fly from the provided String of raw HTML.
-		///		&#10;&#09;3. $(elements) - Wrap jQuery functionality around a single or multiple DOM Element(s).
-		///		&#10;&#09;4. $(callback) - A shorthand for $(document).ready().
-		///		&#10;&#09;5. $() - As of jQuery 1.4, if you pass no arguments in to the jQuery() method, an empty jQuery set will be returned.
-		///	</summary>
+		/// 	&#10;&#09;1. jQuery( element )
+		/// 	&#10;&#09;2. jQuery( elementArray )
+		/// 	&#10;&#09;3. jQuery( jQuery object )
+		/// 	&#10;&#09;4. jQuery(  )
+		/// 	&#10;&#09;5. jQuery( html, [ownerDocument] )
+		/// 	&#10;&#09;6. jQuery( html, props )
+		/// 	&#10;&#09;7. jQuery( callback )
+		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery
+		/// </summary>
 		///	<param name="selector" type="String">
-		///		&#10;&#09;1. expression - An expression to search with.
-		///		&#10;2. html - A string of HTML to create on the fly.
-		///		&#10;3. elements - DOM element(s) to be encapsulated by a jQuery object.
-		///		&#10;4. callback - The function to execute when the DOM is ready.
-		///	</param>
-		///	<param name="context" type="jQuery">
-		///		A DOM Element, Document or jQuery to use as context.
-		///	</param>
-		///	<returns type="jQuery" />
+		/// 	A string containing a selector expression
+		/// </param>
+		///	<param name="context" type="jQuery" optional="true">
+		/// 	A DOM Element, Document, or jQuery to use as context
+		/// </param>
+		/// <returns type="jQuery" />
 };
 $.prototype = {
 
@@ -160,12 +160,12 @@ $.prototype = {
 		/// </param>
 		/// <returns type="jQuery" />
 	}, 
-	each: function(function){
+	each: function(method){
 		/// <summary>
 		/// 	Iterate over a jQuery object, executing a function for each matched element. 
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/each
 		/// </summary>
-		///	<param name="function" type="Function">
+		///	<param name="method" type="Function">
 		/// 	A function to execute for each matched element.
 		/// </param>
 		/// <returns type="jQuery" />
@@ -326,7 +326,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Manipulate the queue of functions to be executed on the matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .queue( [queueName], function )
+		/// 	&#10;&#09;1. .queue( [queueName], method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/queue
 		/// </summary>
 		///	<param name="queueName" type="String" optional="true">
@@ -775,10 +775,10 @@ $.prototype = {
 		/// 	&#10;&#09;2. .unbind( event )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/unbind
 		/// </summary>
-		///	<param name="eventType" type="String">
+		///	<param name="eventType" type="String" optional="true">
 		/// 	A string containing a JavaScript event type, such as click or submit.
 		/// </param>
-		///	<param name="handler" type="Function">
+		///	<param name="handler" type="Function" optional="true">
 		/// 	The function that is to be no longer executed.
 		/// </param>
 		/// <returns type="jQuery" />
@@ -1089,7 +1089,7 @@ $.prototype = {
 		/// </param>
 		/// <returns type="Array" />
 	}, 
-	load: function(url, data, function){
+	load: function(url, data, method){
 		/// <summary>
 		/// 	Load data from the server and place the returned HTML into the matched element.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/load
@@ -1100,7 +1100,7 @@ $.prototype = {
 		///	<param name="data" type="String" optional="true">
 		/// 	A map or string that is sent to the server with the request.
 		/// </param>
-		///	<param name="function" type="Function" optional="true">
+		///	<param name="method" type="Function" optional="true">
 		/// 	A callback function that is executed when the request completes.
 		/// </param>
 		/// <returns type="jQuery" />
@@ -1134,7 +1134,7 @@ $.prototype = {
 		/// 	Remove elements from the set of matched elements.
 		/// 	&#10;Additional Signatures:
 		/// 	&#10;&#09;1. .not( elements )
-		/// 	&#10;&#09;2. .not( function )
+		/// 	&#10;&#09;2. .not( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/not
 		/// </summary>
 		///	<param name="selector" type="String">
@@ -1213,7 +1213,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Set the CSS width of each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .width( function )
+		/// 	&#10;&#09;1. .width( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/width
 		/// </summary>
 		///	<param name="value" type="Number">
@@ -1232,7 +1232,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Set the CSS height of every matched element.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .height( function )
+		/// 	&#10;&#09;1. .height( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/height
 		/// </summary>
 		///	<param name="value" type="Number">
@@ -1302,7 +1302,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Set the current coordinates of every element in the set of matched elements, relative to the document.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .offset( function )
+		/// 	&#10;&#09;1. .offset( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/offset
 		/// </summary>
 		///	<param name="coordinates" type="Object">
@@ -1324,7 +1324,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Set one or more CSS properties for the  set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .css( propertyName, function )
+		/// 	&#10;&#09;1. .css( propertyName, method )
 		/// 	&#10;&#09;2. .css( map )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/css
 		/// </summary>
@@ -1469,7 +1469,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Insert content, specified by the parameter, after each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .after( function )
+		/// 	&#10;&#09;1. .after( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/after
 		/// </summary>
 		///	<param name="content" type="jQuery">
@@ -1491,7 +1491,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .prepend( function )
+		/// 	&#10;&#09;1. .prepend( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/prepend
 		/// </summary>
 		///	<param name="content" type="jQuery">
@@ -1513,7 +1513,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Insert content, specified by the parameter, to the end of each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .append( function )
+		/// 	&#10;&#09;1. .append( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/append
 		/// </summary>
 		///	<param name="content" type="jQuery">
@@ -1532,7 +1532,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Set the value of each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .val( function )
+		/// 	&#10;&#09;1. .val( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/val
 		/// </summary>
 		///	<param name="value" type="String">
@@ -1551,7 +1551,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Set the content of each element in the set of matched elements to the specified text.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .text( function )
+		/// 	&#10;&#09;1. .text( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/text
 		/// </summary>
 		///	<param name="textString" type="String">
@@ -1570,7 +1570,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Set the HTML contents of each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .html( function )
+		/// 	&#10;&#09;1. .html( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/html
 		/// </summary>
 		///	<param name="htmlString" type="String">
@@ -1578,12 +1578,12 @@ $.prototype = {
 		/// </param>
 		/// <returns type="jQuery" />
 	}, 
-	map: function(function){
+	map: function(method){
 		/// <summary>
 		/// 	Pass each element in the current matched set through a function, producing a new jQuery object containing the return values.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/map
 		/// </summary>
-		///	<param name="function" type="Function">
+		///	<param name="method" type="Function">
 		/// 	A function object that will be invoked for each element in the current set.
 		/// </param>
 		/// <returns type="jQuery" />
@@ -1614,7 +1614,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Reduce the set of matched elements to those that match the selector or pass the function's test. 
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .filter( function )
+		/// 	&#10;&#09;1. .filter( method )
 		/// 	&#10;&#09;2. .filter( element )
 		/// 	&#10;&#09;3. .filter( jQuery object )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/filter
@@ -1629,7 +1629,7 @@ $.prototype = {
 		/// 	Add or remove one or more classes from each element in the set of matched elements, depending on either the class's presence or the value of the switch argument.
 		/// 	&#10;Additional Signatures:
 		/// 	&#10;&#09;1. .toggleClass( className, switch )
-		/// 	&#10;&#09;2. .toggleClass( function, [switch] )
+		/// 	&#10;&#09;2. .toggleClass( method, [switch] )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/toggleClass
 		/// </summary>
 		///	<param name="className" type="String">
@@ -1641,7 +1641,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .removeClass( function )
+		/// 	&#10;&#09;1. .removeClass( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/removeClass
 		/// </summary>
 		///	<param name="className" type="String" optional="true">
@@ -1684,7 +1684,7 @@ $.prototype = {
 		/// 	Set one or more attributes for the set of matched elements.
 		/// 	&#10;Additional Signatures:
 		/// 	&#10;&#09;1. .attr( map )
-		/// 	&#10;&#09;2. .attr( attributeName, function )
+		/// 	&#10;&#09;2. .attr( attributeName, method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/attr
 		/// </summary>
 		///	<param name="attributeName" type="String">
@@ -1699,7 +1699,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Adds the specified class(es) to each of the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .addClass( function )
+		/// 	&#10;&#09;1. .addClass( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/addClass
 		/// </summary>
 		///	<param name="className" type="String">
@@ -1876,7 +1876,7 @@ jQuery.queue = function(element, queueName, newQueue){
 		/// <summary>
 		/// 	Manipulate the queue of functions to be executed on the matched element.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. jQuery.queue( element, queueName, function )
+		/// 	&#10;&#09;1. jQuery.queue( element, queueName, method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.queue
 		/// </summary>
 		///	<param name="element" type="Element">
@@ -1929,7 +1929,7 @@ jQuery.ajaxSetup = function(options){
 		/// 	A set of key/value pairs that configure the default Ajax request. All options are optional. 
 		/// </param>
 };
-jQuery.post = function(url, data, function, dataType){
+jQuery.post = function(url, data, method, dataType){
 		/// <summary>
 		/// 	Load data from the server using a HTTP POST request.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.post
@@ -1940,7 +1940,7 @@ jQuery.post = function(url, data, function, dataType){
 		///	<param name="data" type="String" optional="true">
 		/// 	A map or string that is sent to the server with the request.
 		/// </param>
-		///	<param name="function" type="Function" optional="true">
+		///	<param name="method" type="Function" optional="true">
 		/// 	A callback function that is executed if the request succeeds.
 		/// </param>
 		///	<param name="dataType" type="String" optional="true">
@@ -1948,7 +1948,7 @@ jQuery.post = function(url, data, function, dataType){
 		/// </param>
 		/// <returns type="XMLHttpRequest" />
 };
-jQuery.getScript = function(url, function){
+jQuery.getScript = function(url, method){
 		/// <summary>
 		/// 	Load a JavaScript file from the server using a GET HTTP request, then execute it.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.getScript
@@ -1956,12 +1956,12 @@ jQuery.getScript = function(url, function){
 		///	<param name="url" type="String">
 		/// 	A string containing the URL to which the request is sent.
 		/// </param>
-		///	<param name="function" type="Function" optional="true">
+		///	<param name="method" type="Function" optional="true">
 		/// 	A callback function that is executed if the request succeeds.
 		/// </param>
 		/// <returns type="XMLHttpRequest" />
 };
-jQuery.getJSON = function(url, data, function){
+jQuery.getJSON = function(url, data, method){
 		/// <summary>
 		/// 	Load JSON-encoded data from the server using a GET HTTP request.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.getJSON
@@ -1972,12 +1972,12 @@ jQuery.getJSON = function(url, data, function){
 		///	<param name="data" type="Object" optional="true">
 		/// 	A map or string that is sent to the server with the request.
 		/// </param>
-		///	<param name="function" type="Function" optional="true">
+		///	<param name="method" type="Function" optional="true">
 		/// 	A callback function that is executed if the request succeeds.
 		/// </param>
 		/// <returns type="XMLHttpRequest" />
 };
-jQuery.get = function(url, data, function, dataType){
+jQuery.get = function(url, data, method, dataType){
 		/// <summary>
 		/// 	Load data from the server using a HTTP GET request.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.get
@@ -1988,7 +1988,7 @@ jQuery.get = function(url, data, function, dataType){
 		///	<param name="data" type="String" optional="true">
 		/// 	A map or string that is sent to the server with the request.
 		/// </param>
-		///	<param name="function" type="Function" optional="true">
+		///	<param name="method" type="Function" optional="true">
 		/// 	A callback function that is executed if the request succeeds.
 		/// </param>
 		///	<param name="dataType" type="String" optional="true">
@@ -2084,7 +2084,7 @@ jQuery.inArray = function(value, array){
 		/// </param>
 		/// <returns type="Number" />
 };
-jQuery.map = function(array, function){
+jQuery.map = function(array, method){
 		/// <summary>
 		/// 	Translate all items in an array or array-like object to another array of items.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.map
@@ -2092,7 +2092,7 @@ jQuery.map = function(array, function){
 		///	<param name="array" type="Array">
 		/// 	The Array to translate.
 		/// </param>
-		///	<param name="function" type="Function">
+		///	<param name="method" type="Function">
 		/// 	The function to process each item against.  The first argument to the function is the list item, the second argument is the index in array The function can return any value.  this will be the global window object. 
 		/// </param>
 		/// <returns type="Array" />
@@ -2107,7 +2107,7 @@ jQuery.makeArray = function(obj){
 		/// </param>
 		/// <returns type="Array" />
 };
-jQuery.grep = function(array, function, invert){
+jQuery.grep = function(array, method, invert){
 		/// <summary>
 		/// 	Finds the elements of an array which satisfy a filter function. The original array is not affected.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.grep
@@ -2115,7 +2115,7 @@ jQuery.grep = function(array, function, invert){
 		///	<param name="array" type="Array">
 		/// 	The array to search through.
 		/// </param>
-		///	<param name="function" type="Function">
+		///	<param name="method" type="Function">
 		/// 	The function to process each item against.  The first argument to the function is the item, and the second argument is the index.  The function should return a Boolean value.  this will be the global window object.
 		/// </param>
 		///	<param name="invert" type="Boolean" optional="true">
@@ -2141,7 +2141,7 @@ jQuery.extend = function(target, object1, objectN){
 		/// </param>
 		/// <returns type="Object" />
 };
-jQuery.each = function(collection, function){
+jQuery.each = function(collection, method){
 		/// <summary>
 		/// 	A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property (such as a function's arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.each
@@ -2149,7 +2149,7 @@ jQuery.each = function(collection, function){
 		///	<param name="collection" type="Object">
 		/// 	The object or array to iterate over.
 		/// </param>
-		///	<param name="function" type="Function">
+		///	<param name="method" type="Function">
 		/// 	The function that will be executed on every object.
 		/// </param>
 		/// <returns type="Object" />
