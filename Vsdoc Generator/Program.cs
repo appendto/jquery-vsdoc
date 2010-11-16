@@ -167,6 +167,10 @@ namespace Vsdoc_Generator {
 				String optional = arg.HasAttribute("optional") ? " optional=\"true\"" : String.Empty;
 				String integer = type.ToLower() == "integer" ? " integer=\"true\"" : String.Empty;
 
+				if (name == "function") {
+					name = "method";
+				}
+
 				if (type == "Function" && name.Contains("(")) {
 					if (name.Contains("handler")) {
 						name = "handler";
@@ -278,6 +282,10 @@ namespace Vsdoc_Generator {
 			foreach (XmlElement arg in args) {
 				String name = arg.Attributes["name"].Value;
 				String type = arg.HasAttribute("type") ? ResolveType(arg.Attributes["type"].Value) : String.Empty;
+
+				if (name == "function") {
+					name = "method";
+				}
 
 				if (type == "Function" && name.Contains("(")) {
 					if (name.Contains("handler")) {

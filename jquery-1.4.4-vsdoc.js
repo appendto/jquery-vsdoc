@@ -1755,7 +1755,7 @@ jQuery.proxy = function(function, context){
 		/// 	&#10;&#09;1. jQuery.proxy( context, name )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/jQuery.proxy
 		/// </summary>
-		///	<param name="function" type="Function">
+		///	<param name="method" type="Function">
 		/// 	The function whose context will be changed.
 		/// </param>
 		///	<param name="context" type="Object">
