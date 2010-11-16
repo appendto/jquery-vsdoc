@@ -1,4 +1,4 @@
-![jQuery VSDoc](http://pub.a2cdn.net/jquery-vsdoc/img/jquery-vsdoc.png)
+![jQueryVSDoc](http://pub.a2cdn.net/jquery-vsdoc/img/jquery-vsdoc.png)
 ---
 
 Maintained by [appendTo](http://appendto.com).
