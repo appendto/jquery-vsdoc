@@ -1391,7 +1391,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Replace each element in the set of matched elements with the provided new content.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .replaceWith( function )
+		/// 	&#10;&#09;1. .replaceWith( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/replaceWith
 		/// </summary>
 		///	<param name="newContent" type="jQuery">
@@ -1447,7 +1447,7 @@ $.prototype = {
 		/// <summary>
 		/// 	Insert content, specified by the parameter, before each element in the set of matched elements.
 		/// 	&#10;Additional Signatures:
-		/// 	&#10;&#09;1. .before( function )
+		/// 	&#10;&#09;1. .before( method )
 		/// 	&#10;&#10;API Reference: http://api.jquery.com/before
 		/// </summary>
 		///	<param name="content" type="jQuery">
@@ -1748,7 +1748,7 @@ jQuery.parseJSON = function(json){
 		/// </param>
 		/// <returns type="Object" />
 };
-jQuery.proxy = function(function, context){
+jQuery.proxy = function(method, context){
 		/// <summary>
 		/// 	Takes a function and returns a new one that will always have a particular context.
 		/// 	&#10;Additional Signatures:
