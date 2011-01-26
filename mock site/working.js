@@ -1,5 +1,5 @@
 ﻿/// <reference path="/js/test.js" />
-/// <reference path="/js/jquery-1.4.4-vsdoc.js" />
+/// <reference path="/js/jquery-1.5-vsdoc.js" />
 
 
 $('div').delegate(
