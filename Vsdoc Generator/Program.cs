@@ -8,14 +8,30 @@ using System.Xml;
 using System.Xml.Linq;
 
 namespace Vsdoc_Generator {
+
+	public static class Extensions {
+
+		public static void AddRange<T, U>(this IDictionary<T, U> D, IEnumerable<KeyValuePair<T, U>> V) {
+			foreach (var kvp in V) {
+				if (D.ContainsKey(kvp.Key)) {
+					throw new ArgumentException("An item with the same key has already been added.");
+				}
+				D.Add(kvp);
+			}
+		}
+	}
+	
 	class Program {
 
 		static XmlNodeList categories = null;
 		static List<XmlNode> staticMethods = new List<XmlNode>();
 		static List<XmlNode> instanceMethods = new List<XmlNode>();
 		static List<XmlNode> jQuery = new List<XmlNode>();
+		static Dictionary<String, String> reservedWords;
 
 		static void Main(string[] args) {
+
+			InitReservedWords();
 
 			String apiXml = String.Empty;
 			XmlDocument xml = new XmlDocument();
@@ -45,7 +61,7 @@ namespace Vsdoc_Generator {
 
 			}
 
-			using (FileStream fs = new FileStream("jquery-1.4.4-vsdoc.js", FileMode.Create, FileAccess.ReadWrite)) {
+			using (FileStream fs = new FileStream("jquery-1.5-vsdoc.js", FileMode.Create, FileAccess.ReadWrite)) {
 				using (StreamWriter sw = new StreamWriter(fs)) {
 					sw.Write(Render());
 				}
@@ -65,9 +81,9 @@ namespace Vsdoc_Generator {
 			foreach (XmlElement method in instanceMethods) {
 				methodOutput.Add(RenderMethod(method, true));
 			}
-			
+
 			sb.Append(RenderJQuery());
-			sb.Append("$.prototype = {\n");
+			sb.Append("$.fn = $.prototype = {\n");
 			sb.Append(String.Join(", ", methodOutput.ToArray()));
 			sb.Append("\n};\n");
 
@@ -133,7 +149,7 @@ namespace Vsdoc_Generator {
 				for (int i = 1; i < signatures.Count; i++) {
 					XmlNode signature = signatures[i];
 					String arguments = BuildArguments(signature, true);
-										
+
 					sb.Append(String.Format("\t\t/// \t&#10;&#09;{0}. {1}( {2} )\n", i.ToString(), methodName, arguments));
 				}
 
@@ -167,9 +183,10 @@ namespace Vsdoc_Generator {
 				String optional = arg.HasAttribute("optional") ? " optional=\"true\"" : String.Empty;
 				String integer = type.ToLower() == "integer" ? " integer=\"true\"" : String.Empty;
 
-				if (name == "function") {
-					name = "method";
-				}
+				//if (name == "function") {
+				//  name = "method";
+				//}
+				name = ReplaceReservedWord(name);
 
 				if (type == "Function" && name.Contains("(")) {
 					if (name.Contains("handler")) {
@@ -291,7 +308,7 @@ namespace Vsdoc_Generator {
 					if (name.Contains("handler")) {
 						name = "handler";
 					}
-					else{
+					else {
 						name = "method";
 					}
 				}
@@ -311,5 +328,77 @@ namespace Vsdoc_Generator {
 			return String.Join(", ", arguments.ToArray());
 		}
 
+		static void InitReservedWords() {
+
+			reservedWords = new Dictionary<String, String>() {
+				{ "break", String.Empty },
+				{ "case", "kase" },
+				{ "catch", String.Empty },
+				{ "continue", String.Empty },
+				{ "debugger", String.Empty },
+				{ "default", String.Empty },
+				{ "delete", String.Empty },
+				{ "do", String.Empty },
+				{ "else", String.Empty },
+				{ "finally", String.Empty },
+				{ "for", "_for" },
+				{ "function", "method" },
+				{ "if", String.Empty },
+				{ "in", String.Empty },
+				{ "instanceof", String.Empty },
+				{ "new", String.Empty },
+				{ "return", String.Empty },
+				{ "switch", String.Empty },
+				{ "this", String.Empty },
+				{ "throw", String.Empty },
+				{ "try", String.Empty },
+				{ "typeof", String.Empty },
+				{ "var", String.Empty },
+				{ "void", String.Empty },
+				{ "while", String.Empty },
+				{ "with", String.Empty },
+				{ "class", "klass" },
+				{ "enum", String.Empty },
+				{ "export", String.Empty },
+				{ "extends", String.Empty },
+				{ "import", String.Empty },
+				{ "super", String.Empty },
+				{ "implements", String.Empty },
+				{ "interface", String.Empty },
+				{ "let", String.Empty },
+				{ "package", String.Empty },
+				{ "private", String.Empty },
+				{ "protected", String.Empty },
+				{ "public", String.Empty },
+				{ "static", String.Empty },
+				{ "yield", String.Empty }
+			};
+
+		}
+
+		/// <summary>
+		/// Resolves any conflicts with reserved words.
+		/// The jQuery docs aren't exactly consistent, many functions in the docs use reserve words for parameter names.
+		/// </summary>
+		/// <param name="word"></param>
+		/// <returns></returns>
+		static String ReplaceReservedWord(String word) {
+
+			String result = word;
+
+			if (reservedWords.ContainsKey(word)) {
+				String replacement = reservedWords[word];
+
+				if (String.IsNullOrEmpty(replacement)) {
+					replacement = String.Concat("_", word);
+				}
+
+				result = replacement;
+			}
+
+			return result;
+
+		}
 	}
+
 }
